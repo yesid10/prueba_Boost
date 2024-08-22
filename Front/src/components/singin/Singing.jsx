@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FcGoogle } from "react-icons/fc";
+import { AuthProvider, useAuth } from '../../context/AuthContext';
 
 const Singing = () => {
+
+  const {user, loginWihtGoogle} = useAuth();
+
+  const handleLogoinWihtGoogle = () => {
+    console.log('Click desde el boton de google')
+    loginWihtGoogle();
+    
+  }
+  console.log('user',user.user)
+
+
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -69,7 +82,7 @@ const Singing = () => {
         <div>
           <p className="mt-5 mb-4 text-center text-gray-700">O continúa con</p>
           <div className="flex justify-center">
-            <button className="flex items-center px-6 py-2 border border-gray-200 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-gray-100 hover:bg-gray-100 focus:outline-none focus:ring-2focus:ring-offset-2">
+            <button onClick={() => handleLogoinWihtGoogle()} className="flex items-center px-6 py-2 border border-gray-200 rounded-lg shadow-sm text-base font-medium text-gray-700 bg-gray-100 hover:bg-gray-100 focus:outline-none focus:ring-2focus:ring-offset-2">
               <FcGoogle className="mr-2 h-6 w-6" />
               Google
             </button>
