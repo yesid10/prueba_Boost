@@ -1,20 +1,32 @@
 
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { select } from '@material-tailwind/react'
 
-const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Products', href: '#', current: false },
-  { name: 'Contact', href: '#', current: false },
-]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 
 const Navbar = () => {
+
+
+  const navigation = [
+    { name: 'Home', path: '/welcome' },
+    { name: 'Products', path: '/products' },
+    { name: 'Contact', path: '/contact' },
+  ]
+  
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavigate = (path) => {
+    navigate(path)
+  }
   return (
     <div>
       <Disclosure as="nav" className="bg-gray-800">
@@ -40,17 +52,17 @@ const Navbar = () => {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
-                    <a
+                    <button
                       key={item.name}
-                      href={item.href}
-                      aria-current={item.current ? 'page' : undefined}
+                      
+                      onClick={() => handleNavigate(item.path)}
                       className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        location.pathname === item.path ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium',
                       )}
                     >
                       {item.name}
-                    </a>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -109,10 +121,10 @@ const Navbar = () => {
               <DisclosureButton
                 key={item.name}
                 as="a"
-                href={item.href}
-                aria-current={item.current ? 'page' : undefined}
+                onClick={() => handleNavigate(item.path)}
+                
                 className={classNames(
-                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  location.pathname === item.path ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                   'block rounded-md px-3 py-2 text-base font-medium',
                 )}
               >
@@ -123,6 +135,8 @@ const Navbar = () => {
         </DisclosurePanel>
       </Disclosure>
       <Outlet />
+
+
     </div>
 
 

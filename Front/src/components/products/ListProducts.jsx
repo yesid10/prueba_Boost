@@ -16,8 +16,6 @@ const ListProducts = () => {
     })
   })
 
-  console.log("Mostrando desde el componenete",products)
-
   
   return (
     <div className="bg-white">
