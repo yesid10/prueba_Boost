@@ -18,14 +18,18 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState({});
+   
     const navigate = useNavigate(); 
-
+    
     const loginWihtGoogle = async () => {
         try {
             const provider = new GoogleAuthProvider();
             const response = await signInWithPopup(auth, provider);
             if(response.user){
                 setUser(response.user)
+
+                sessionStorage.setItem('userLogued', JSON.stringify(response.user));
+
                 Swal.fire(
                     "Good job!",
                     `Hola ${response.user.displayName}`,
@@ -39,6 +43,7 @@ export const AuthProvider = ({ children }) => {
             console.error('Error al iniciar sesión con Google:', error);
             throw error;
         }
+       
     }
 
     const logout = async () => {

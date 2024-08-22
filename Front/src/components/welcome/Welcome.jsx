@@ -15,17 +15,17 @@ const Welcome = () => {
         <div className="mt-8 flex flex-col items-center">
           <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800">Productos Destacados</h2>
-            <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6">
+            <div className="mt-4 flex justify-center gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6">
              
               <div className="bg-gray-200 p-4 rounded-lg shadow-sm">
                 <img
-                  src="https://via.placeholder.com/150"
+                  src="https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Product"
                   className="w-full h-32 object-cover rounded-md"
                 />
                 <h3 className="mt-2 text-lg font-semibold text-gray-700">Nombre del Producto</h3>
-                <p className="mt-1 text-sm text-gray-500">Descripción breve del producto.</p>
-                <p className="mt-2 text-lg font-bold text-gray-900">$XX.XX</p>
+                <p className="mt-1 text-sm text-gray-500"></p>
+                <p className="mt-2 text-lg font-bold text-gray-900">$ 25.00</p>
               </div>
               
             </div>

@@ -1,9 +1,10 @@
 
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useAuth } from '../../context/AuthContext'
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
 
 
@@ -17,14 +18,26 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ]
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+ 
+    const storedUser = sessionStorage.getItem('userLogued');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      navigate('/');
+    }
+  }, [navigate]);
 
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
-  const navigate = useNavigate();
+ 
   const location = useLocation();
 
   const handleNavigate = (path) => {
@@ -45,13 +58,13 @@ const Navbar = () => {
               </DisclosureButton>
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center">
+              <Link to={'/welcome'} className="flex flex-shrink-0 items-center">
                 <img
                   alt="Your Company"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
+                  src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fast-food-restaurant-logo%2C-restaurant-logo-design-template-33255790cb8e1186b28609dd9afd4ee6_screen.jpg?ts=1668794604"
+                  className="h-10 w-auto rounded-lg"
                 />
-              </div>
+              </Link>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
@@ -77,7 +90,7 @@ const Navbar = () => {
               >
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">View notifications</span>
-                <span className="font-semibold">{user.displayName}</span>
+                <span className="font-semibold">{user?.displayName}</span>
               </button>
 
               {/* Profile dropdown */}
@@ -88,7 +101,7 @@ const Navbar = () => {
                     <span className="sr-only">Open user menu</span>
                     <img
                       alt=""
-                      src={user.photoURL}
+                      src={user?.photoURL}
                       className="h-8 w-8 rounded-full"
                     />
                   </MenuButton>

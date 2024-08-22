@@ -1,18 +1,15 @@
 import React, { useContext } from 'react'
 import { FcGoogle } from "react-icons/fc";
-import { AuthProvider, useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 const Singing = () => {
 
   const {user, loginWihtGoogle} = useAuth();
 
   const handleLogoinWihtGoogle = () => {
-    console.log('Click desde el boton de google')
     loginWihtGoogle();
     
   }
-  console.log('user',user)
-
 
 
   return (
@@ -20,8 +17,9 @@ const Singing = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           alt="Your Company"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          className="mx-auto h-10 w-auto"
+          src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fast-food-restaurant-logo%2C-restaurant-logo-design-template-33255790cb8e1186b28609dd9afd4ee6_screen.jpg?ts=1668794604"
+          className="mx-auto"
+          style={{height:'10rem', width:'auto'}}
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
@@ -53,7 +51,7 @@ const Singing = () => {
               </label>
               <div className="text-sm">
                 <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                  Forgot password?
+                  Rescuperar contraseña
                 </a>
               </div>
             </div>
