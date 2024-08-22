@@ -1,7 +1,9 @@
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useAuth } from '../../context/AuthContext'
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 
 
@@ -14,7 +16,10 @@ const Navbar = () => {
     { name: 'Products', path: '/products' },
     { name: 'Contact', path: '/contact' },
   ]
-  
+
+  const { user } = useAuth();
+
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
@@ -52,7 +57,7 @@ const Navbar = () => {
                   {navigation.map((item) => (
                     <button
                       key={item.name}
-                      
+
                       onClick={() => handleNavigate(item.path)}
                       className={classNames(
                         location.pathname === item.path ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
@@ -72,7 +77,7 @@ const Navbar = () => {
               >
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">View notifications</span>
-                <BellIcon aria-hidden="true" className="h-6 w-6" />
+                <span className="font-semibold">{user.displayName}</span>
               </button>
 
               {/* Profile dropdown */}
@@ -83,27 +88,18 @@ const Navbar = () => {
                     <span className="sr-only">Open user menu</span>
                     <img
                       alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={user.photoURL}
                       className="h-8 w-8 rounded-full"
                     />
                   </MenuButton>
+
                 </div>
                 <MenuItems
                   transition
                   className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                 >
                   <MenuItem>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                      Your Profile
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                      Settings
-                    </a>
-                  </MenuItem>
-                  <MenuItem>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                    <a href="#" className="block px-4 py-2 text-m font-bold text-red-600 data-[focus]:bg-gray-100">
                       Sign out
                     </a>
                   </MenuItem>
@@ -120,7 +116,7 @@ const Navbar = () => {
                 key={item.name}
                 as="a"
                 onClick={() => handleNavigate(item.path)}
-                
+
                 className={classNames(
                   location.pathname === item.path ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                   'block rounded-md px-3 py-2 text-base font-medium',
@@ -134,7 +130,66 @@ const Navbar = () => {
       </Disclosure>
       <Outlet />
 
+      <footer className="bg-gray-800 text-white py-8">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between">
+            {/* Logo and Description */}
+            <div className="mb-6 md:mb-0">
+              <h2 className="text-2xl font-bold">TuTienda</h2>
+              <p className="mt-2 text-gray-400">
+                Tu tienda de productos favoritos. Ofrecemos lo mejor para ti.
+              </p>
+            </div>
 
+            {/* Navigation Links */}
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-lg font-semibold mb-4">Navegación</h3>
+              <ul>
+                <li><a href="/home" className="text-gray-400 hover:text-white">Inicio</a></li>
+                <li><a href="/shop" className="text-gray-400 hover:text-white">Tienda</a></li>
+                <li><a href="/about" className="text-gray-400 hover:text-white">Sobre Nosotros</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-white">Contacto</a></li>
+              </ul>
+            </div>
+
+            {/* Contact Information */}
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+              <ul>
+                <li className="mb-2"><a href="mailto:info@tutienda.com" className="text-gray-400 hover:text-white">info@tutienda.com</a></li>
+                <li className="mb-2"><a href="tel:+123456789" className="text-gray-400 hover:text-white">+1 (234) 567-89</a></li>
+                <li className="mb-2">123 Calle Principal, Ciudad, País</li>
+              </ul>
+            </div>
+
+            {/* Social Media Links */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Síguenos</h3>
+              <div className="flex space-x-4">
+                <a href="https://facebook.com" className="text-gray-400 hover:text-white" aria-label="Facebook">
+                  <FaFacebookF size={20} />
+                </a>
+                <a href="https://twitter.com" className="text-gray-400 hover:text-white" aria-label="Twitter">
+                  <FaTwitter size={20} />
+                </a>
+                <a href="https://instagram.com" className="text-gray-400 hover:text-white" aria-label="Instagram">
+                  <FaInstagram size={20} />
+                </a>
+                <a href="https://linkedin.com" className="text-gray-400 hover:text-white" aria-label="LinkedIn">
+                  <FaLinkedinIn size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="mt-8 border-t border-gray-700 pt-4 text-center">
+            <p className="text-gray-400 text-sm">
+              &copy; {new Date().getFullYear()} TuTienda. Todos los derechos reservados.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
 
 

@@ -11,7 +11,7 @@ const Singing = () => {
     loginWihtGoogle();
     
   }
-  console.log('user',user.user)
+  console.log('user',user)
 
 
 

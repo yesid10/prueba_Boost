@@ -1,11 +1,10 @@
 import axios from "axios";
 
-const URL_API = "https://fakestoreapi.com/";
+const URL_API = "http://localhost:8080/api/v1/products/";
 
 export const getData = async (endpoint) => {
     try {
         const {data} = await axios.get(`${URL_API}${endpoint}`);
-        console.log("Msotrando desde la funcion",data);
 
         return data;
 
