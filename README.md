@@ -79,6 +79,8 @@ mvn spring-boot:run
 - Frontend: La aplicación de Vite corre por defecto en el puerto 5173. Puedes acceder a ella en http://localhost:5173.
 - Backend: El servidor Spring Boot corre por defecto en el puerto 8080. Puedes acceder a él en http://localhost:8080.
 
+## Muestra tu apoyo
+### ¡Dale un ⭐️ al repositorio si te gustó!
 
 
 
