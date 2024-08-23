@@ -53,6 +53,34 @@ Necesitas tener instalados:
 Clona el repositorio:
 
 ```bash
-git clone https://github.com/tuusuario/nombre-del-proyecto.git
-cd nombre-del-proyecto
+git clone https://github.com/yesid10/prueba_Boost.git
+cd prueba_Boost
 ```
+### Frontend (Vite + React)
+```bash
+cd frontend
+npm install
+```
+Para ejecutar la aplicación en desarrollo:
+```bash
+npm run dev
+```
+### Backend (Spring Boot)
+```bash
+cd backend
+mvn install
+```
+Para ejecutar el servidor backend:
+```bash
+mvn spring-boot:run
+```
+
+## Puertos
+- Frontend: La aplicación de Vite corre por defecto en el puerto 5173. Puedes acceder a ella en http://localhost:5173.
+- Backend: El servidor Spring Boot corre por defecto en el puerto 8080. Puedes acceder a él en http://localhost:8080.
+
+
+
+
+
+
