@@ -47,9 +47,19 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        const response = await signOut(auth);
-        console.log('Logout',response)
-    }
+        try {
+            await signOut(auth);
+    
+        
+            sessionStorage.clear();
+            window.location.reload();
+    
+            console.log('Logout exitoso. SessionStorage ha sido limpiado.');
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+        }
+    };
+    
 
     return (
         <authContext.Provider

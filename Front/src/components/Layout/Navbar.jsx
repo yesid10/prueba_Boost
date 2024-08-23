@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ]
 
-  // const { user } = useAuth();
+  const { logout } = useAuth();
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -42,6 +42,10 @@ const Navbar = () => {
 
   const handleNavigate = (path) => {
     navigate(path)
+  }
+
+  const handleLogout= () => {
+    logout();
   }
   return (
     <div>
@@ -90,7 +94,7 @@ const Navbar = () => {
               >
                 <span className="absolute -inset-1.5" />
                 <span className="sr-only">View notifications</span>
-                <span className="font-semibold">{user?.displayName}</span>
+                <span className=" hidden sm:block font-semibold">{user?.displayName}</span>
               </button>
 
               {/* Profile dropdown */}
@@ -112,9 +116,9 @@ const Navbar = () => {
                   className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                 >
                   <MenuItem>
-                    <a href="#" className="block px-4 py-2 text-m font-bold text-red-600 data-[focus]:bg-gray-100">
+                    <button onClick={() => handleLogout()} className="block px-4 py-2 text-m font-bold text-red-600 data-[focus]:bg-gray-100">
                       Sign out
-                    </a>
+                    </button>
                   </MenuItem>
                 </MenuItems>
               </Menu>
@@ -141,6 +145,7 @@ const Navbar = () => {
           </div>
         </DisclosurePanel>
       </Disclosure>
+      
       <Outlet />
 
       <footer className="bg-gray-800 text-white py-8">
@@ -148,7 +153,7 @@ const Navbar = () => {
           <div className="flex flex-col md:flex-row justify-between">
             {/* Logo and Description */}
             <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl font-bold">TuTienda</h2>
+              <h2 className="text-2xl font-bold">Food Boost</h2>
               <p className="mt-2 text-gray-400">
                 Tu tienda de productos favoritos. Ofrecemos lo mejor para ti.
               </p>
@@ -158,10 +163,9 @@ const Navbar = () => {
             <div className="mb-6 md:mb-0">
               <h3 className="text-lg font-semibold mb-4">Navegación</h3>
               <ul>
-                <li><a href="/home" className="text-gray-400 hover:text-white">Inicio</a></li>
-                <li><a href="/shop" className="text-gray-400 hover:text-white">Tienda</a></li>
-                <li><a href="/about" className="text-gray-400 hover:text-white">Sobre Nosotros</a></li>
-                <li><a href="/contact" className="text-gray-400 hover:text-white">Contacto</a></li>
+                <li><Link to="/welcome" className="text-gray-400 hover:text-white">Home</Link></li>
+                <li><Link to="/products" className="text-gray-400 hover:text-white">Productos</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white">Contacto</Link></li>
               </ul>
             </div>
 
@@ -169,9 +173,9 @@ const Navbar = () => {
             <div className="mb-6 md:mb-0">
               <h3 className="text-lg font-semibold mb-4">Contacto</h3>
               <ul>
-                <li className="mb-2"><a href="mailto:info@tutienda.com" className="text-gray-400 hover:text-white">info@tutienda.com</a></li>
-                <li className="mb-2"><a href="tel:+123456789" className="text-gray-400 hover:text-white">+1 (234) 567-89</a></li>
-                <li className="mb-2">123 Calle Principal, Ciudad, País</li>
+                <li className="mb-2"><a href="mailto:yesidvanegas68@gmail.com" className="text-gray-400 hover:text-white">yesidvanegas68@gmail.com</a></li>
+                <li className="mb-2"><a href="tel:+573118599554" className="text-gray-400 hover:text-white">+57 (311) 859-9554</a></li>
+                <li className="mb-2">Tunja, Colombia</li>
               </ul>
             </div>
 
@@ -198,7 +202,7 @@ const Navbar = () => {
           {/* Footer Bottom */}
           <div className="mt-8 border-t border-gray-700 pt-4 text-center">
             <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} TuTienda. Todos los derechos reservados.
+              &copy; {new Date().getFullYear()} Food Boost. Todos los derechos reservados.
             </p>
           </div>
         </div>
